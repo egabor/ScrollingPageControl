@@ -25,5 +25,7 @@ class CircularView: UIView {
 	
 	private func updateCornerRadius() {
 		layer.cornerRadius = min(bounds.width, bounds.height) / 2
+        layer.shadowRadius = 0.5
+        layer.shadowOffset = .init(width: 1, height: 2)
 	}
 }
