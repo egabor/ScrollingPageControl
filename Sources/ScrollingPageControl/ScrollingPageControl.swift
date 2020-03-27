@@ -32,6 +32,7 @@ open class ScrollingPageControl: UIView {
 		dotViews = (0..<pages).map { index in
 			delegate?.viewForDot(at: index) ?? CircularView(frame: CGRect(origin: .zero, size: CGSize(width: dotSize, height: dotSize)))
 		}
+        updateColors()
 	}
 	//	The index of the currently selected page
 	open var selectedPage: Int = 0 {
@@ -91,7 +92,8 @@ open class ScrollingPageControl: UIView {
 	open var dotColor = UIColor.lightGray { didSet { updateColors() } }
 	//	The color of the currently selected dot
 	open var selectedColor = #colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1) { didSet { updateColors() } }
-	
+    open var selectedShadowColor = UIColor.clear { didSet { updateColors() } }
+
 	//	The size of the dots
 	open var dotSize: CGFloat = 6 {
 		didSet {
@@ -133,6 +135,8 @@ open class ScrollingPageControl: UIView {
 	private func updateColors() {
 		dotViews.enumerated().forEach { page, dot in
 			dot.tintColor = page == selectedPage ? selectedColor : dotColor
+            dot.layer.shadowOpacity = page == selectedPage ? 1.0 : 0.0
+            dot.layer.shadowColor = selectedShadowColor.cgColor
 		}
 	}
 	
