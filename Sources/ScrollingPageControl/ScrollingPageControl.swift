@@ -137,6 +137,9 @@ open class ScrollingPageControl: UIView {
 			dot.tintColor = page == selectedPage ? selectedColor : dotColor
             dot.layer.shadowOpacity = page == selectedPage ? 1.0 : 0.0
             dot.layer.shadowColor = selectedShadowColor.cgColor
+            if delegate != nil {
+                dot.backgroundColor = page == selectedPage ? selectedColor : .clear
+            }
 		}
 	}
 	
